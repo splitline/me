@@ -1,3 +1,4 @@
+/* basic html elements */
 body {
     background-color: #f2f4f5;
 }
@@ -43,6 +44,8 @@ pre {
     overflow: auto;
 }
 
+
+/* custom class */
 .container {
     margin: 8em auto 0 auto ;
     padding-bottom: 4em;
@@ -118,10 +121,9 @@ pre {
 .more {
     margin: 0 auto;
     display: block;
-    width: 500px;
+    width: 90%;
     color: #555;
     background-color:  #eee;
-    margin-top: 1.5em;
     padding: 0.5em;
 }
 
