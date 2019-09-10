@@ -11,7 +11,6 @@
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-
         gtag('config', 'UA-51534833-2');
     </script>
 
@@ -49,7 +48,7 @@
                 <li>
                     <p class="timeline-date">2019/8</p>
                     <div class="timeline-content">
-                        <h3>AIS3 2019 </h3>
+                        <h3>AIS3 2019</h3>
                         <p>Vulnerability Web 最佳專題獎</p>
                     </div>
                 </li>
@@ -170,13 +169,12 @@
                     民國 104 年彰雲嘉區資訊科 佳作
                 </ul>
             </div>
-
         </div>
 
         <hr>
 
         <div class="content" id="speech">
-            <h2>喇賽經歷 / Talk Experiences</h2>
+            <h2>喇賽經歷 / Public Talk Experiences</h2>
             <div class="content">
                 <h3>2019 SITCON 學生計算機年會 講者</h3>
                 <p>欸，那個 QuerySelector 實際上在幹嘛啊</p>
@@ -200,9 +198,15 @@
                 <p>Web Engineer Intern, 2017/7 ~ 2018/12</p>
             </div>
             <div class="content">
-                <h3>中研院 資訊科學所 <a
-                        href="https://www.iis.sinica.edu.tw/page/recruitment/SummerInterns_2019.html?lang=zh"><i
-                            class="fa fa-link"></i></a></h3>
+                <h3>台科大 研究發展處
+                    <a href="https://iot2gather.ntust.edu.tw"><i class="fa fa-link"></i></a></h3>
+                <p>Web Developer, 2019/4 ~ </p>
+            </div>
+            <div class="content">
+                <h3>中研院 資訊科學所
+                    <a href="https://www.iis.sinica.edu.tw/page/recruitment/SummerInterns_2019.html?lang=zh"><i
+                            class="fa fa-link"></i></a>
+                </h3>
                 <p>Research Intern, 2019/7 ~ 2019/8</p>
             </div>
         </div>
@@ -211,24 +215,43 @@
 
         <div class="content" id="project">
             <h2>專案作品 / Projects</h2>
-            <div>
-                <div class="github-card" data-github="splitline/NTUSTapp" data-width="100%"></div>
-                <div class="github-card" data-github="splitline/AnimateGamerPlus" data-width="100%"></div>
-                <div class="github-card" data-github="splitline/buddymeter-cheater" data-width="100%"></div>
-                <div class="github-card" data-github="splitline/Taiwan-Tech-GPA-Saviour" data-width="100%"></div>
-                <div class="github-card" data-github="NTUSTISC/NTUSTISC-scoreboard" data-width="100%"></div>
-                <a class="more" target="_blank" href="https://github.com/splitline">
-                    更多作品 <i class="fab fa-github"></i>
-                </a>
-            </div>
+            <div id="repos"></div>
+            <a class="more" target="_blank" href="https://github.com/splitline">
+                更多作品 <i class="fab fa-github"></i>
+            </a>
         </div>
     </div>
 
     <footer>
-        Design by @splitline.
+        Designed by @splitline.
     </footer>
 
-    <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
+    <!-- <script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script> -->
+    <script>
+        fetch('https://api.github.com/search/repositories?q=user:splitline+fork:true&sort=stars&order=desc')
+            .then(r => r.json())
+            .then(({ items }) => {
+                items.slice(0,10).forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'gh-repo';
+                    card.innerHTML = `
+                        <div>
+                            <a href="${item.html_url}" target="_blank" class="name">${item.full_name}</a>
+                            <a href="${item.html_url}" target="_blank" class="star-btn">
+                                <i class="fa fa-star"></i>
+                                Star
+                            </a>
+                        </div>
+                        <p class="description">${item.description}</p>
+                        <div class="details">
+                            <span><i class="fa fa-code"></i> ${item.language}</span>
+                            <span><i class="fa fa-star"></i> ${item.stargazers_count}</span>
+                            <span><i class="fa fa-code-branch"></i> ${item.forks_count} </span>
+                        </div>`;
+                    document.getElementById('repos').appendChild(card);
+                });
+            })
+    </script>
 </body>
 
 </html>
